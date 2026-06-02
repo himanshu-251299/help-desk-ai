@@ -40,4 +40,9 @@ public class Ticket {
         }
         this.updatedOn = LocalDateTime.now();
     }
+
+    @PreUpdate
+    void preUpdate(){
+        this.updatedOn = LocalDateTime.now();
+    }
 }
