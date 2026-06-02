@@ -3,10 +3,7 @@ package com.spring.help.desk.controller;
 import com.spring.help.desk.service.AiService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/ai")
@@ -16,8 +13,8 @@ public class AiController {
     private final AiService aiService;
 
     @PostMapping
-    public ResponseEntity<String> getResponse(@RequestBody String query){
-        return ResponseEntity.ok(aiService.getResponseFromAssistant(query));
+    public ResponseEntity<String> getResponse(@RequestBody String query, @RequestHeader("ConversationId") String conversationId){
+        return ResponseEntity.ok(aiService.getResponseFromAssistant(query, conversationId));
     }
 
 }

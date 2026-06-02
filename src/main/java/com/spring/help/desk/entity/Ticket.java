@@ -21,11 +21,16 @@ public class Ticket {
     @Lob
     private String summary;
 
+    @Column(length = 1000)
+    private String description;
+
+    private String category;
+
     @Enumerated(EnumType.STRING)
     private Priority priority;
 
     @Column(unique = true)
-    private String username;
+    private String email;
 
     private LocalDateTime createdOn;
     private LocalDateTime updatedOn;

@@ -25,7 +25,7 @@ public class TicketService {
         return ticketRepository.findById(ticketId).orElse(null);
     }
 
-    public Ticket getTicketByUsername(String username){
-        return ticketRepository.findByUsername(username).orElse(null);
+    public Ticket getTicketByEmail(String email){
+        return ticketRepository.findByEmail(email).orElse(null);
     }
 }
