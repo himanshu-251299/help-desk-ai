@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import reactor.core.publisher.Flux;
 
 @Service
 @Data
@@ -32,6 +33,17 @@ public class AiService {
                 .system(systemPrompt)
                 .user(query)
                 .call()
+                .content();
+    }
+
+    public Flux<String> streamResponseFromAssistant(String query, String conversationId){
+        return this.chatClient
+                .prompt()
+                .advisors(advisorSpec -> advisorSpec.param(ChatMemory.CONVERSATION_ID, conversationId))
+                .tools(ticketDatabaseTool, emailTool)
+                .system(systemPrompt)
+                .user(query)
+                .stream()
                 .content();
     }
 }
